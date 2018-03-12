@@ -2,8 +2,8 @@
     <string name="app_name">Photo Editor</string>
     <string name="no_images">No image found</string>
     <string name="images">%d images</string>
-    <string name="save">Save</string>
-    <string name="apply">Apply</string>
+    <string name="done">DONE</string>
+    <string name="apply">APPLY</string>
 
     <string name="stickers">Stickers</string>
     <string name="filter">Filter</string>

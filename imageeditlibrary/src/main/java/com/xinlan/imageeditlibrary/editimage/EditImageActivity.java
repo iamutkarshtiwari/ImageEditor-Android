@@ -195,7 +195,7 @@ public class EditImageActivity extends BaseActivity {
             }
         });
 
-        mRedoUndoController = new RedoUndoController(this, findViewById(R.id.redo_uodo_panel));
+        mRedoUndoController = new RedoUndoController(this, findViewById(R.id.redo_undo_panel));
     }
 
     /**

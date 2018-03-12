@@ -29,7 +29,7 @@ public class RedoUndoController implements View.OnClickListener {
         this.mActivity = activity;
         this.mRootView = panelView;
 
-        mUndoBtn = mRootView.findViewById(R.id.uodo_btn);
+        mUndoBtn = mRootView.findViewById(R.id.undo_btn);
         mRedoBtn = mRootView.findViewById(R.id.redo_btn);
 
         mUndoBtn.setOnClickListener(this);

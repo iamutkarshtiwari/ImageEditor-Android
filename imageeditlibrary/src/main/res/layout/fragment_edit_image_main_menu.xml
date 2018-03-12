@@ -130,7 +130,7 @@
             <ImageView
                 style="@style/icon_style"
                 android:layout_gravity="center"
-                android:src="@drawable/stickers"/>
+                android:src="@drawable/ic_stickers"/>
 
             <TextView
                 android:layout_width="wrap_content"
