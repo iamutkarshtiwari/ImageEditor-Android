@@ -1,80 +1,148 @@
-<HorizontalScrollView
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:scrollbars="none"
     android:layout_width="wrap_content"
-    android:layout_height="fill_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/btn_paint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            style="@style/option_style"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/btn_stickers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/stickers"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/paint"/>
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/edit"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/btn_filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/filter"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            style="@style/option_style"
+            android:orientation="vertical">
 
-        <TextView
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/filter"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/filter"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/btn_crop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/crop"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            style="@style/option_style"
+            android:orientation="vertical">
 
-        <TextView
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/crop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/text"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn_rotate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/rotate"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            style="@style/option_style"
+            android:orientation="vertical">
 
-        <TextView
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/rotate"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/rotate"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/btn_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/image_edit_menu_margin"
-            android:gravity="center"
-            android:text="@string/text"
-            android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            style="@style/option_style"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/text"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_stickers"
+            style="@style/option_style"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/icon_style"
+                android:layout_gravity="center"
+                android:src="@drawable/stickers"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/stickers"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/image_edit_text_size"
+                tool:text="Text"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/btn_beauty"
@@ -85,7 +153,8 @@
             android:gravity="center"
             android:text="@string/beauty"
             android:textColor="@color/white"
-            android:textSize="@dimen/image_edit_text_size"/>
+            android:textSize="@dimen/image_edit_text_size"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </HorizontalScrollView>

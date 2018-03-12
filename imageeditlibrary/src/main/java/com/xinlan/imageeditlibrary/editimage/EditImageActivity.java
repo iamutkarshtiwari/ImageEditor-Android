@@ -13,12 +13,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.isseiaoki.simplecropview.CropImageView;
 import com.xinlan.imageeditlibrary.BaseActivity;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
@@ -30,7 +32,6 @@ import com.xinlan.imageeditlibrary.editimage.fragment.PaintFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.RotateFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
 import com.xinlan.imageeditlibrary.editimage.utils.FileUtil;
-import com.xinlan.imageeditlibrary.editimage.view.CropImageView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomPaintView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomViewPager;
 import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
@@ -39,7 +40,6 @@ import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
-import com.xinlan.imageeditlibrary.editimage.widget.EditCache;
 import com.xinlan.imageeditlibrary.editimage.widget.RedoUndoController;
 
 /**
@@ -252,6 +252,7 @@ public class EditImageActivity extends BaseActivity {
      */
     public void loadImage(String filepath) {
         if (mLoadImageTask != null) {
+            Log.e("Image Editor", "Image is null");
             mLoadImageTask.cancel(true);
         }
         mLoadImageTask = new LoadImageTask();

@@ -3,4 +3,22 @@
         <item name="android:windowEnterAnimation">@anim/menushow</item>
         <item name="android:windowExitAnimation">@anim/menuhide</item>
     </style>
+
+    <style name="icon_style">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+
+
+    </style>
+
+    <style name="option_style">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>
