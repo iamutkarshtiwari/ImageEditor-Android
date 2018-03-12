@@ -118,14 +118,14 @@ public class CropFragment extends BaseEditFragment {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.WRAP_CONTENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.CENTER_VERTICAL;
+		params.gravity = Gravity.CENTER;
 		params.leftMargin = 20;
 		params.rightMargin = 20;
 		RatioText[] ratioTextList = RatioText.values();
 		for (int i = 0; i < ratioTextList.length; i++) {
 			TextView text = new TextView(activity);
 			text.setTextColor(UNSELECTED_COLOR);
-			text.setTextSize(20);
+			text.setTextSize(15);
 			text.setText(ratioTextList[i].ratioText);
 			textViewList.add(text);
 			ratioList.addView(text, params);
