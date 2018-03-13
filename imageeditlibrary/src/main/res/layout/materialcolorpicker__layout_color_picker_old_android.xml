@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/colorView"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
-        android:elevation="2dp"/>
+        android:elevation="2dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -27,7 +26,7 @@
             android:fontFamily="sans-serif-medium"
             android:singleLine="true"
             android:textColor="@android:color/holo_red_light"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/redSeekBar"
@@ -38,7 +37,7 @@
             android:maxHeight="3dip"
             android:minHeight="3dip"
             android:progressDrawable="@drawable/red_progress"
-            android:thumbTint="@android:color/holo_red_light"/>
+            android:thumbTint="@android:color/holo_red_light" />
 
         <TextView
             android:id="@+id/greenToolTip"
@@ -48,7 +47,7 @@
             android:fontFamily="sans-serif-medium"
             android:singleLine="true"
             android:textColor="@android:color/holo_green_light"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/greenSeekBar"
@@ -59,7 +58,7 @@
             android:maxHeight="3dip"
             android:minHeight="3dip"
             android:progressDrawable="@drawable/materialcolorpicker__green_progress"
-            android:thumbTint="@android:color/holo_green_light"/>
+            android:thumbTint="@android:color/holo_green_light" />
 
         <TextView
             android:id="@+id/blueToolTip"
@@ -69,7 +68,7 @@
             android:fontFamily="sans-serif-medium"
             android:singleLine="true"
             android:textColor="@android:color/holo_blue_light"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/blueSeekBar"
@@ -80,7 +79,7 @@
             android:maxHeight="3dip"
             android:minHeight="3dip"
             android:progressDrawable="@drawable/materialcolorpicker__blue_progress"
-            android:thumbTint="@android:color/holo_blue_light"/>
+            android:thumbTint="@android:color/holo_blue_light" />
 
         <EditText
             android:id="@+id/codHex"
@@ -101,7 +100,7 @@
             android:textAllCaps="false"
             android:textColor="@color/primary_text_default_material_light"
             android:textColorHint="@color/hint_foreground_material_light"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/okColorButton"
@@ -112,7 +111,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:clickable="true"
-            android:text="@string/materialcolorpicker__btnSelectColor"/>
+            android:text="@string/materialcolorpicker__btnSelectColor" />
 
     </RelativeLayout>
 

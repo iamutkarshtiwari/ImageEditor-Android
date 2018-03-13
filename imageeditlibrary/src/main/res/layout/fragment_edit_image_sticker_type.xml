@@ -1,9 +1,8 @@
-<ViewFlipper android:id="@+id/flipper"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="@dimen/bottom_banner_height"
-             android:flipInterval="1000">
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flipper"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_banner_height"
+    android:flipInterval="1000">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/image_edit_back"/>
+            android:src="@drawable/image_edit_back" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/stickers_type_list"
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:overScrollMode="never"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +37,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/image_edit_back"/>
+            android:src="@drawable/image_edit_back" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/stickers_list"
@@ -46,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:overScrollMode="never"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
     </LinearLayout>
 
 </ViewFlipper>

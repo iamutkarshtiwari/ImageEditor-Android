@@ -1,39 +1,39 @@
 package com.xinlan.imageeditlibrary.editimage.model;
 
 public class RatioItem {
-	private String text;
-	private Float ratio;
-	private int index;
+    private String text;
+    private Float ratio;
+    private int index;
 
-	public RatioItem(String text, Float ratio) {
-		super();
-		this.text = text;
-		this.ratio = ratio;
-	}
+    public RatioItem(String text, Float ratio) {
+        super();
+        this.text = text;
+        this.ratio = ratio;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public Float getRatio() {
-		return ratio;
-	}
+    public Float getRatio() {
+        return ratio;
+    }
 
-	public void setRatio(Float ratio) {
-		this.ratio = ratio;
-	}
-	
+    public void setRatio(Float ratio) {
+        this.ratio = ratio;
+    }
 
-	public int getIndex() {
-		return index;
-	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public int getIndex() {
+        return index;
+    }
 
-}// end class
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+}

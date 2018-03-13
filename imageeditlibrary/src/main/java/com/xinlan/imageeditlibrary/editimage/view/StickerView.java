@@ -1,8 +1,6 @@
 package com.xinlan.imageeditlibrary.editimage.view;
 
 
-import java.util.LinkedHashMap;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,27 +10,24 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * 贴图操作控件
- *
- * @author panyi
- */
+import java.util.LinkedHashMap;
+
 public class StickerView extends View {
     private static int STATUS_IDLE = 0;
-    private static int STATUS_MOVE = 1;// 移动状态
-    private static int STATUS_DELETE = 2;// 删除状态
-    private static int STATUS_ROTATE = 3;// 图片旋转状态
+    private static int STATUS_MOVE = 1;
+    private static int STATUS_DELETE = 2;
+    private static int STATUS_ROTATE = 3;
 
-    private int imageCount;// 已加入照片的数量
+    private int imageCount;
     private Context mContext;
-    private int currentStatus;// 当前状态
-    private StickerItem currentItem;// 当前操作的贴图数据
+    private int currentStatus;
+    private StickerItem currentItem;
     private float oldx, oldy;
 
     private Paint rectPaint = new Paint();
     private Paint boxPaint = new Paint();
 
-    private LinkedHashMap<Integer, StickerItem> bank = new LinkedHashMap<Integer, StickerItem>();// 存贮每层贴图数据
+    private LinkedHashMap<Integer, StickerItem> bank = new LinkedHashMap<Integer, StickerItem>();
 
     public StickerView(Context context) {
         super(context);
@@ -65,31 +60,26 @@ public class StickerView extends View {
             currentItem.isDrawHelpTool = false;
         }
         bank.put(++imageCount, item);
-        this.invalidate();// 重绘视图
+        this.invalidate();
     }
 
-    /**
-     * 绘制客户页面
-     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // System.out.println("on draw!!~");
         for (Integer id : bank.keySet()) {
             StickerItem item = bank.get(id);
             item.draw(canvas);
-        }// end for each
+        }
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        // System.out.println(w + "   " + h + "    " + oldw + "   " + oldh);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean ret = super.onTouchEvent(event);// 是否向下传递事件标志 true为消耗
+        boolean ret = super.onTouchEvent(event);
 
         int action = event.getAction();
         float x = event.getX();
@@ -100,11 +90,11 @@ public class StickerView extends View {
                 int deleteId = -1;
                 for (Integer id : bank.keySet()) {
                     StickerItem item = bank.get(id);
-                    if (item.detectDeleteRect.contains(x, y)) {// 删除模式
+                    if (item.detectDeleteRect.contains(x, y)) {
                         // ret = true;
                         deleteId = id;
                         currentStatus = STATUS_DELETE;
-                    } else if (item.detectRotateRect.contains(x, y)) {// 点击了旋转按钮
+                    } else if (item.detectRotateRect.contains(x, y)) {
                         ret = true;
                         if (currentItem != null) {
                             currentItem.isDrawHelpTool = false;
@@ -114,8 +104,7 @@ public class StickerView extends View {
                         currentStatus = STATUS_ROTATE;
                         oldx = x;
                         oldy = y;
-                    } else if (item.dstRect.contains(x, y)) {// 移动模式
-                        // 被选中一张贴图
+                    } else if (item.dstRect.contains(x, y)) {
                         ret = true;
                         if (currentItem != null) {
                             currentItem.isDrawHelpTool = false;
@@ -125,41 +114,40 @@ public class StickerView extends View {
                         currentStatus = STATUS_MOVE;
                         oldx = x;
                         oldy = y;
-                    }// end if
-                }// end for each
+                    }
+                }
 
-                if (!ret && currentItem != null && currentStatus == STATUS_IDLE) {// 没有贴图被选择
+                if (!ret && currentItem != null && currentStatus == STATUS_IDLE) {
                     currentItem.isDrawHelpTool = false;
                     currentItem = null;
                     invalidate();
                 }
 
-                if (deleteId > 0 && currentStatus == STATUS_DELETE) {// 删除选定贴图
+                if (deleteId > 0 && currentStatus == STATUS_DELETE) {
                     bank.remove(deleteId);
-                    currentStatus = STATUS_IDLE;// 返回空闲状态
+                    currentStatus = STATUS_IDLE;
                     invalidate();
-                }// end if
+                }
 
                 break;
             case MotionEvent.ACTION_MOVE:
                 ret = true;
-                if (currentStatus == STATUS_MOVE) {// 移动贴图
+                if (currentStatus == STATUS_MOVE) {
                     float dx = x - oldx;
                     float dy = y - oldy;
                     if (currentItem != null) {
                         currentItem.updatePos(dx, dy);
                         invalidate();
-                    }// end if
+                    }
                     oldx = x;
                     oldy = y;
-                } else if (currentStatus == STATUS_ROTATE) {// 旋转 缩放图片操作
-                    // System.out.println("旋转");
+                } else if (currentStatus == STATUS_ROTATE) {
                     float dx = x - oldx;
                     float dy = y - oldy;
                     if (currentItem != null) {
-                        currentItem.updateRotateAndScale(oldx, oldy, dx, dy);// 旋转
+                        currentItem.updateRotateAndScale(oldx, oldy, dx, dy);
                         invalidate();
-                    }// end if
+                    }
                     oldx = x;
                     oldy = y;
                 }
@@ -169,7 +157,7 @@ public class StickerView extends View {
                 ret = false;
                 currentStatus = STATUS_IDLE;
                 break;
-        }// end switch
+        }
         return ret;
     }
 
@@ -181,4 +169,4 @@ public class StickerView extends View {
         bank.clear();
         this.invalidate();
     }
-}// end class
+}

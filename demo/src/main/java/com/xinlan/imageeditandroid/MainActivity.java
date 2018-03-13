@@ -11,9 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +23,6 @@ import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.picchooser.SelectPictureActivity;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int REQUEST_PERMISSON_SORAGE = 1;
@@ -103,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE},
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_PERMISSON_CAMERA);
             return;
         }
@@ -135,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void editImageClick() {
         File outputFile = FileUtils.genEditFile();
-        EditImageActivity.start(this,path,outputFile.getAbsolutePath(),ACTION_REQUEST_EDITIMAGE);
+        EditImageActivity.start(this, path, outputFile.getAbsolutePath(), ACTION_REQUEST_EDITIMAGE);
     }
 
     /**
@@ -187,7 +184,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            // System.out.println("RESULT_OK");
             switch (requestCode) {
                 case SELECT_GALLERY_IMAGE_CODE://
                     handleSelectFromAblum(data);
@@ -198,15 +194,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case ACTION_REQUEST_EDITIMAGE://
                     handleEditorImage(data);
                     break;
-            }// end switch
+            }
         }
     }
 
-    /**
-     * 处理拍照返回
-     *
-     * @param data
-     */
     private void handleTakePhoto(Intent data) {
         if (photoURI != null) {//拍摄成功
             path = photoURI.getPath();
@@ -218,14 +209,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String newFilePath = data.getStringExtra(EditImageActivity.EXTRA_OUTPUT);
         boolean isImageEdit = data.getBooleanExtra(EditImageActivity.IMAGE_IS_EDIT, false);
 
-        if (isImageEdit){
+        if (isImageEdit) {
             Toast.makeText(this, getString(R.string.save_path, newFilePath), Toast.LENGTH_LONG).show();
-        }else{//未编辑  还是用原来的图片
-            newFilePath = data.getStringExtra(EditImageActivity.FILE_PATH);;
+        } else {
+            newFilePath = data.getStringExtra(EditImageActivity.FILE_PATH);
+
         }
-        //System.out.println("newFilePath---->" + newFilePath);
-        //File file = new File(newFilePath);
-        //System.out.println("newFilePath size ---->" + (file.length() / 1024)+"KB");
         Log.d("image is edit", isImageEdit + "");
         LoadImageTask loadTask = new LoadImageTask();
         loadTask.execute(newFilePath);
@@ -234,7 +223,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void handleSelectFromAblum(Intent data) {
         String filepath = data.getStringExtra("imgPath");
         path = filepath;
-        // System.out.println("path---->"+path);
         startLoadTask();
     }
 
@@ -277,6 +265,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mainBitmap = result;
             imgView.setImageBitmap(mainBitmap);
         }
-    }// end inner class
+    }
 
 }//end class

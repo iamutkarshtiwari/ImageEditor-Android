@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -12,19 +11,12 @@
         android:layout_gravity="center_vertical"
         android:src="@drawable/image_edit_back" />
 
-    <HorizontalScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/filter_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/back_to_main"
-        android:layout_centerInParent="true" >
-
-        <LinearLayout
-            android:id="@+id/filter_group"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_toRightOf="@id/back_to_main"/>
 
 </RelativeLayout>

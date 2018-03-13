@@ -13,10 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by panyi on 17/2/11.
- */
-
 public class CustomPaintView extends View {
     private Paint mPaint;
     private Bitmap mDrawBit;
@@ -54,7 +50,6 @@ public class CustomPaintView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        //System.out.println("width = "+getMeasuredWidth()+"     height = "+getMeasuredHeight());
         if (mDrawBit == null) {
             generatorBit();
         }
@@ -153,4 +148,4 @@ public class CustomPaintView extends View {
 
         generatorBit();
     }
-}//end class
+}

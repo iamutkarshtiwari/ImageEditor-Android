@@ -21,11 +21,6 @@ import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
 import java.lang.ref.WeakReference;
 
 
-/**
- * 美颜功能
- *
- * @author 潘易
- */
 public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBarChangeListener {
     public static final String TAG = BeautyFragment.class.getName();
 
@@ -114,7 +109,7 @@ public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBa
         public void onClick(View v) {
             backToMain();
         }
-    }// end class
+    }
 
     /**
      * 返回主菜单
@@ -207,7 +202,7 @@ public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBa
             mResultBitmapRef = new WeakReference<Bitmap>(result);
             activity.mainImage.setImageBitmap(mResultBitmapRef.get());
         }
-    }//end inner class
+    }
 
     @Override
     public void onDestroy() {
@@ -216,4 +211,4 @@ public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBa
             mHandleTask.cancel(true);
         }
     }
-}// end class
+}

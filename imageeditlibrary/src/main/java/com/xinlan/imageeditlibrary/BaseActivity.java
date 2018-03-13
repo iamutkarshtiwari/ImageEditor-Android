@@ -20,23 +20,15 @@ import java.io.File;
 
 public class BaseActivity extends AppCompatActivity {
 
-    /**
-     * 检测图片载入框架是否导入  若没有 则导入并初始化
-     */
     protected void checkInitImageLoader() {
         if (!ImageLoader.getInstance().isInited()) {
             initImageLoader();
-        }//end if
+        }
     }
 
-    /**
-     * 初始化图片载入框架
-     */
     private void initImageLoader() {
         File cacheDir = StorageUtils.getCacheDirectory(this);
         int MAXMEMONRY = (int) (Runtime.getRuntime().maxMemory());
-        // System.out.println("dsa-->"+MAXMEMONRY+"   "+(MAXMEMONRY/5));//.memoryCache(new
-        // LruMemoryCache(50 * 1024 * 1024))
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
@@ -59,7 +51,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public static Dialog getLoadingDialog(Context context, int titleId,
                                           boolean canCancel) {
-        return getLoadingDialog(context,context.getString(titleId),canCancel);
+        return getLoadingDialog(context, context.getString(titleId), canCancel);
     }
 
 
@@ -70,4 +62,4 @@ public class BaseActivity extends AppCompatActivity {
         dialog.setMessage(title);
         return dialog;
     }
-}//end class
+}

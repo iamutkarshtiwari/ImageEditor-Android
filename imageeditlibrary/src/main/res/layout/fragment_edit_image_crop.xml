@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <ImageView
         android:id="@+id/back_to_main"
@@ -15,17 +14,16 @@
     <HorizontalScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/back_to_main"
-        android:layout_centerInParent="true">
+        android:layout_toRightOf="@id/back_to_main">
 
         <LinearLayout
             android:id="@+id/ratio_list_group"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:orientation="horizontal" >
-        </LinearLayout>
+            android:orientation="horizontal"></LinearLayout>
     </HorizontalScrollView>
 
 </RelativeLayout>

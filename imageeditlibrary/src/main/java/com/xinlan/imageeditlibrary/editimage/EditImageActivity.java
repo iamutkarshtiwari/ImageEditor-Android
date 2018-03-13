@@ -26,23 +26,23 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.BeautyFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.BrightnessFragment;
-import com.xinlan.imageeditlibrary.editimage.fragment.SaturationFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.CropFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.FilterListFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.MainMenuFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.PaintFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.RotateFragment;
+import com.xinlan.imageeditlibrary.editimage.fragment.SaturationFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
+import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.utils.FileUtil;
+import com.xinlan.imageeditlibrary.editimage.view.BrightnessView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomPaintView;
 import com.xinlan.imageeditlibrary.editimage.view.CustomViewPager;
 import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
+import com.xinlan.imageeditlibrary.editimage.view.SaturationView;
 import com.xinlan.imageeditlibrary.editimage.view.StickerView;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
-import com.xinlan.imageeditlibrary.editimage.view.BrightnessView;
-import com.xinlan.imageeditlibrary.editimage.view.SaturationView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
-import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
 import com.xinlan.imageeditlibrary.editimage.widget.RedoUndoController;
 
@@ -55,58 +55,58 @@ public class EditImageActivity extends BaseActivity {
     public static final String IMAGE_IS_EDIT = "image_is_edit";
 
     public static final int MODE_NONE = 0;
-    public static final int MODE_STICKERS = 1;// 贴图模式
-    public static final int MODE_FILTER = 2;// 滤镜模式
-    public static final int MODE_CROP = 3;// 剪裁模式
-    public static final int MODE_ROTATE = 4;// 旋转模式
-    public static final int MODE_TEXT = 5;// 文字模式
-    public static final int MODE_PAINT = 6;//绘制模式
-    public static final int MODE_BEAUTY = 7;//美颜模式
+    public static final int MODE_STICKERS = 1;
+    public static final int MODE_FILTER = 2;
+    public static final int MODE_CROP = 3;
+    public static final int MODE_ROTATE = 4;
+    public static final int MODE_TEXT = 5;
+    public static final int MODE_PAINT = 6;
+    public static final int MODE_BEAUTY = 7;
     public static final int MODE_BRIGHTNESS = 8;
     public static final int MODE_SATURATION = 9;
 
-    public String filePath;// 需要编辑图片路径
-    public String saveFilePath;// 生成的新图片路径
-    private int imageWidth, imageHeight;// 展示图片控件 宽 高
+    public String filePath;
+    public String saveFilePath;
+    private int imageWidth, imageHeight;
     private LoadImageTask mLoadImageTask;
 
-    public int mode = MODE_NONE;// 当前操作模式
+    public int mode = MODE_NONE;
 
     protected int mOpTimes = 0;
     protected boolean isBeenSaved = false;
 
     private EditImageActivity mContext;
-    private Bitmap mainBitmap;// 底层显示Bitmap
+    private Bitmap mainBitmap;
     public ImageViewTouch mainImage;
     private View backBtn;
 
     public ViewFlipper bannerFlipper;
-    private View applyBtn;// 应用按钮
-    private View saveBtn;// 保存按钮
+    private View applyBtn;
+    private View saveBtn;
 
-    public StickerView mStickerView;// 贴图层View
-    public CropImageView mCropPanel;// 剪切操作控件
-    public RotateImageView mRotatePanel;// 旋转操作控件
-    public TextStickerView mTextStickerView;//文本贴图显示View
-    public CustomPaintView mPaintView;//涂鸦模式画板
+    public StickerView mStickerView;
+    public CropImageView mCropPanel;
+    public RotateImageView mRotatePanel;
+    public TextStickerView mTextStickerView;
+    public CustomPaintView mPaintView;
     public BrightnessView mBrightnessView;
     public SaturationView mSaturationView;
 
-    public CustomViewPager bottomGallery;// 底部gallery
-    private BottomGalleryAdapter mBottomGalleryAdapter;// 底部gallery
-    private MainMenuFragment mMainMenuFragment;// Menu
-    public StickerFragment mStickerFragment;// 贴图Fragment
-    public FilterListFragment mFilterListFragment;// 滤镜FliterListFragment
-    public CropFragment mCropFragment;// 图片剪裁Fragment
-    public RotateFragment mRotateFragment;// 图片旋转Fragment
-    public AddTextFragment mAddTextFragment;//图片添加文字
-    public PaintFragment mPaintFragment;//绘制模式Fragment
-    public BeautyFragment mBeautyFragment;//美颜模式Fragment
+    public CustomViewPager bottomGallery;
+    private BottomGalleryAdapter mBottomGalleryAdapter;
+    private MainMenuFragment mMainMenuFragment;
+    public StickerFragment mStickerFragment;
+    public FilterListFragment mFilterListFragment;
+    public CropFragment mCropFragment;
+    public RotateFragment mRotateFragment;
+    public AddTextFragment mAddTextFragment;
+    public PaintFragment mPaintFragment;
+    public BeautyFragment mBeautyFragment;
     private SaveImageTask mSaveImageTask;
     public BrightnessFragment mBrightnessFragment;
     public SaturationFragment mSaturationFragment;
 
-    private RedoUndoController mRedoUndoController;//撤销操作
+    private RedoUndoController mRedoUndoController;
 
     /**
      * @param context
@@ -156,7 +156,7 @@ public class EditImageActivity extends BaseActivity {
         saveBtn.setOnClickListener(new SaveBtnClick());
 
         mainImage = (ImageViewTouch) findViewById(R.id.main_image);
-        backBtn = findViewById(R.id.back_btn);// 退出按钮
+        backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,10 +172,7 @@ public class EditImageActivity extends BaseActivity {
         mBrightnessView = (BrightnessView) findViewById(R.id.brightness_panel);
         mSaturationView = (SaturationView) findViewById(R.id.contrast_panel);
 
-
-        // 底部gallery
         bottomGallery = (CustomViewPager) findViewById(R.id.bottom_gallery);
-        //bottomGallery.setOffscreenPageLimit(7);
         mMainMenuFragment = MainMenuFragment.newInstance();
         mBottomGalleryAdapter = new BottomGalleryAdapter(
                 this.getSupportFragmentManager());
@@ -195,7 +192,6 @@ public class EditImageActivity extends BaseActivity {
         mainImage.setFlingListener(new ImageViewTouch.OnImageFlingListener() {
             @Override
             public void onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                //System.out.println(e1.getAction() + " " + e2.getAction() + " " + velocityX + "  " + velocityY);
                 if (velocityY > 1) {
                     closeInputMethod();
                 }
@@ -205,9 +201,6 @@ public class EditImageActivity extends BaseActivity {
         mRedoUndoController = new RedoUndoController(this, findViewById(R.id.redo_undo_panel));
     }
 
-    /**
-     * 关闭输入法
-     */
     private void closeInputMethod() {
         if (mAddTextFragment.isAdded()) {
             mAddTextFragment.hideInput();
@@ -229,29 +222,28 @@ public class EditImageActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int index) {
-            // System.out.println("createFragment-->"+index);
             switch (index) {
-                case MainMenuFragment.INDEX:// 主菜单
+                case MainMenuFragment.INDEX:
                     return mMainMenuFragment;
-                case StickerFragment.INDEX:// 贴图
+                case StickerFragment.INDEX:
                     return mStickerFragment;
-                case FilterListFragment.INDEX:// 滤镜
+                case FilterListFragment.INDEX:
                     return mFilterListFragment;
-                case CropFragment.INDEX://剪裁
+                case CropFragment.INDEX:
                     return mCropFragment;
-                case RotateFragment.INDEX://旋转
+                case RotateFragment.INDEX:
                     return mRotateFragment;
-                case AddTextFragment.INDEX://添加文字
+                case AddTextFragment.INDEX:
                     return mAddTextFragment;
                 case PaintFragment.INDEX:
-                    return mPaintFragment;//绘制
-                case BeautyFragment.INDEX://美颜
+                    return mPaintFragment;
+                case BeautyFragment.INDEX:
                     return mBeautyFragment;
                 case BrightnessFragment.INDEX:
                     return mBrightnessFragment;
                 case SaturationFragment.INDEX:
                     return mSaturationFragment;
-            }//end switch
+            }
             return MainMenuFragment.newInstance();
         }
 
@@ -259,13 +251,8 @@ public class EditImageActivity extends BaseActivity {
         public int getCount() {
             return 10;
         }
-    }// end inner class
+    }
 
-    /**
-     * 异步载入编辑图片
-     *
-     * @param filepath
-     */
     public void loadImage(String filepath) {
         if (mLoadImageTask != null) {
             Log.e("Image Editor", "Image is null");
@@ -275,9 +262,6 @@ public class EditImageActivity extends BaseActivity {
         mLoadImageTask.execute(filepath);
     }
 
-    /**
-     * 导入文件图片任务
-     */
     private final class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
         @Override
         protected Bitmap doInBackground(String... params) {
@@ -289,7 +273,7 @@ public class EditImageActivity extends BaseActivity {
         protected void onPostExecute(Bitmap result) {
             changeMainBitmap(result, false);
         }
-    }// end inner class
+    }
 
     @Override
     public void onBackPressed() {
@@ -297,13 +281,13 @@ public class EditImageActivity extends BaseActivity {
             case MODE_STICKERS:
                 mStickerFragment.backToMain();
                 break;
-            case MODE_FILTER:// 滤镜编辑状态
-                mFilterListFragment.backToMain();// 保存滤镜贴图
+            case MODE_FILTER:
+                mFilterListFragment.backToMain();
                 break;
-            case MODE_CROP:// 剪切图片保存
+            case MODE_CROP:
                 mCropFragment.backToMain();
                 break;
-            case MODE_ROTATE:// 旋转图片保存
+            case MODE_ROTATE:
                 mRotateFragment.backToMain();
                 break;
             case MODE_TEXT:
@@ -312,7 +296,7 @@ public class EditImageActivity extends BaseActivity {
             case MODE_PAINT:
                 mPaintFragment.backToMain();
                 break;
-            case MODE_BEAUTY://从美颜模式中返回
+            case MODE_BEAUTY:
                 mBeautyFragment.backToMain();
                 break;
             case MODE_BRIGHTNESS:
@@ -323,11 +307,11 @@ public class EditImageActivity extends BaseActivity {
                 break;
             default:
                 break;
-        }// end switch
+        }
 
         if (canAutoExit()) {
             onSaveTaskDone();
-        } else {//图片还未被保存    弹出提示框确认
+        } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage(R.string.exit_without_save)
                     .setCancelable(false).setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
@@ -345,34 +329,29 @@ public class EditImageActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 应用按钮点击
-     *
-     * @author panyi
-     */
     private final class ApplyBtnClick implements OnClickListener {
         @Override
         public void onClick(View v) {
             switch (mode) {
                 case MODE_STICKERS:
-                    mStickerFragment.applyStickers();// 保存贴图
+                    mStickerFragment.applyStickers();
                     break;
-                case MODE_FILTER:// 滤镜编辑状态
-                    mFilterListFragment.applyFilterImage();// 保存滤镜贴图
+                case MODE_FILTER:
+                    mFilterListFragment.applyFilterImage();
                     break;
-                case MODE_CROP:// 剪切图片保存
+                case MODE_CROP:
                     mCropFragment.applyCropImage();
                     break;
-                case MODE_ROTATE:// 旋转图片保存
+                case MODE_ROTATE:
                     mRotateFragment.applyRotateImage();
                     break;
-                case MODE_TEXT://文字贴图 图片保存
+                case MODE_TEXT:
                     mAddTextFragment.applyTextImage();
                     break;
-                case MODE_PAINT://保存涂鸦
+                case MODE_PAINT:
                     mPaintFragment.savePaintImage();
                     break;
-                case MODE_BEAUTY://保存美颜后的图片
+                case MODE_BEAUTY:
                     mBeautyFragment.applyBeauty();
                     break;
                 case MODE_BRIGHTNESS:
@@ -383,25 +362,20 @@ public class EditImageActivity extends BaseActivity {
                     break;
                 default:
                     break;
-            }// end switch
+            }
         }
-    }// end inner class
+    }
 
-    /**
-     * 保存按钮 点击退出
-     *
-     * @author panyi
-     */
     private final class SaveBtnClick implements OnClickListener {
         @Override
         public void onClick(View v) {
-            if (mOpTimes == 0) {//并未修改图片
+            if (mOpTimes == 0) {
                 onSaveTaskDone();
             } else {
                 doSaveImage();
             }
         }
-    }// end inner class
+    }
 
     protected void doSaveImage() {
         if (mOpTimes <= 0)
@@ -425,7 +399,7 @@ public class EditImageActivity extends BaseActivity {
 
         if (mainBitmap == null || mainBitmap != newBit) {
             if (needPushUndoStack) {
-                mRedoUndoController.switchMainBit(mainBitmap,newBit);
+                mRedoUndoController.switchMainBit(mainBitmap, newBit);
                 increaseOpTimes();
             }
             mainBitmap = newBit;
@@ -474,10 +448,6 @@ public class EditImageActivity extends BaseActivity {
         finish();
     }
 
-    /**
-     * 保存图像
-     * 完成后退出
-     */
     private final class SaveImageTask extends AsyncTask<Bitmap, Void, Boolean> {
         private Dialog dialog;
 
@@ -520,10 +490,10 @@ public class EditImageActivity extends BaseActivity {
                 Toast.makeText(mContext, R.string.save_error, Toast.LENGTH_SHORT).show();
             }
         }
-    }//end inner class
+    }
 
     public Bitmap getMainBit() {
         return mainBitmap;
     }
 
-}// end class
+}

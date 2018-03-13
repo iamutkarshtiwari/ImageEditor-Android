@@ -13,11 +13,6 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
 
 
-/**
- * 贴图分类列表Adapter
- *
- * @author panyi
- */
 public class StickerTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     public static final int[] typeIcon = {R.drawable.stickers_type_animal,
             R.drawable.stickers_type_motion, R.drawable.stickers_type_cos,
@@ -41,7 +36,7 @@ public class StickerTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
             this.text = (TextView) itemView.findViewById(R.id.text);
         }
-    }// end inner class
+    }
 
     @Override
     public int getItemCount() {
@@ -62,25 +57,16 @@ public class StickerTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         return holer;
     }
 
-    /**
-     */
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ImageHolder imageHoler = (ImageHolder) holder;
-        // imageHoler.icon.setImageResource(R.drawable.ic_launcher);
         String name = stickerPathName[position];
         imageHoler.text.setText(name);
-        // TODO
-        //imageHoler.icon.setImageResource(typeIcon[position]);
         imageHoler.text.setTag(stickerPath[position]);
         imageHoler.text.setOnClickListener(mImageClick);
     }
 
-    /**
-     * 选择贴图类型
-     *
-     * @author panyi
-     */
     private final class ImageClick implements OnClickListener {
         @Override
         public void onClick(View v) {
@@ -88,5 +74,5 @@ public class StickerTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
             // System.out.println("data---->" + data);
             mStickerFragment.swipToStickerDetails(data);
         }
-    }// end inner class
-}// end class
+    }
+}

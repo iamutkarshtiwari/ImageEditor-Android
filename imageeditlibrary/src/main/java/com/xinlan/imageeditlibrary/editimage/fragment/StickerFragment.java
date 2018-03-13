@@ -33,11 +33,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * 贴图分类fragment
- *
- * @author panyi
- */
 public class StickerFragment extends BaseEditFragment {
     public static final int INDEX = ModuleConfig.INDEX_STICKER;
 
@@ -46,12 +41,12 @@ public class StickerFragment extends BaseEditFragment {
 
     private View mainView;
     private ViewFlipper flipper;
-    private View backToMenu;// 返回主菜单
-    private RecyclerView typeList;// 贴图分类列表
-    private RecyclerView stickerList;// 贴图素材列表
-    private View backToType;// 返回类型选择
-    private StickerView mStickerView;// 贴图显示控件
-    private StickerAdapter mStickerAdapter;// 贴图列表适配器
+    private View backToMenu;
+    private RecyclerView typeList;
+    private RecyclerView stickerList;
+    private View backToType;
+    private StickerView mStickerView;
+    private StickerAdapter mStickerAdapter;
 
     private LoadStickersTask mLoadStickersTask;
     private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
@@ -71,11 +66,9 @@ public class StickerFragment extends BaseEditFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
         mainView = inflater.inflate(R.layout.fragment_edit_image_sticker_type,
                 null);
-        //loadStickersData();
-
         return mainView;
     }
 
@@ -107,10 +100,10 @@ public class StickerFragment extends BaseEditFragment {
         mStickerAdapter = new StickerAdapter(this);
         stickerList.setAdapter(mStickerAdapter);
 
-        backToMenu.setOnClickListener(new BackToMenuClick());// 返回主菜单
+        backToMenu.setOnClickListener(new BackToMenuClick());
         backToType.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {// 返回上一级列表
+            public void onClick(View v) {
                 flipper.showPrevious();
             }
         });
@@ -124,7 +117,7 @@ public class StickerFragment extends BaseEditFragment {
         activity.bannerFlipper.showNext();
     }
 
-    //导入贴图数据
+
     private void loadStickersData() {
         if (mLoadStickersTask != null) {
             mLoadStickersTask.cancel(true);
@@ -133,10 +126,6 @@ public class StickerFragment extends BaseEditFragment {
         mLoadStickersTask.execute(1);
     }
 
-
-    /**
-     * 导入贴图数据
-     */
     private final class LoadStickersTask extends AsyncTask<Integer, Void, Void> {
         private Dialog loadDialog;
 
@@ -179,7 +168,7 @@ public class StickerFragment extends BaseEditFragment {
             super.onCancelled();
             loadDialog.dismiss();
         }
-    }//end inner class
+    }
 
     @Override
     public void onDestroy() {
@@ -189,22 +178,11 @@ public class StickerFragment extends BaseEditFragment {
         }
     }
 
-    /**
-     * 跳转至贴图详情列表
-     *
-     * @param path
-     */
     public void swipToStickerDetails(String path) {
         mStickerAdapter.addStickerImages(path);
         flipper.showNext();
     }
 
-    /**
-     * 从Assert文件夹中读取位图数据
-     *
-     * @param fileName
-     * @return
-     */
     private Bitmap getImageFromAssetsFile(String fileName) {
         Bitmap image = null;
         AssetManager am = getResources().getAssets();
@@ -218,11 +196,6 @@ public class StickerFragment extends BaseEditFragment {
         return image;
     }
 
-    /**
-     * 选择贴图加入到页面中
-     *
-     * @param path
-     */
     public void selectedStickerItem(String path) {
         mStickerView.addBitImage(getImageFromAssetsFile(path));
     }
@@ -235,17 +208,12 @@ public class StickerFragment extends BaseEditFragment {
         this.mStickerView = mStickerView;
     }
 
-    /**
-     * 返回主菜单页面
-     *
-     * @author panyi
-     */
     private final class BackToMenuClick implements OnClickListener {
         @Override
         public void onClick(View v) {
             backToMain();
         }
-    }// end inner class
+    }
 
     @Override
     public void backToMain() {
@@ -255,11 +223,6 @@ public class StickerFragment extends BaseEditFragment {
         activity.bannerFlipper.showPrevious();
     }
 
-    /**
-     * 保存贴图任务
-     *
-     * @author panyi
-     */
     private final class SaveStickersTask extends StickerTask {
         public SaveStickersTask(EditImageActivity activity) {
             super(activity);
@@ -272,26 +235,22 @@ public class StickerFragment extends BaseEditFragment {
                 StickerItem item = addItems.get(id);
                 item.matrix.postConcat(m);// 乘以底部图片变化矩阵
                 canvas.drawBitmap(item.bitmap, item.matrix, null);
-            }// end for
+            }
         }
 
         @Override
         public void onPostResult(Bitmap result) {
             mStickerView.clear();
-            activity.changeMainBitmap(result,true);
+            activity.changeMainBitmap(result, true);
             backToMain();
         }
-    }// end inner class
+    }
 
-    /**
-     * 保存贴图层 合成一张图片
-     */
     public void applyStickers() {
-        // System.out.println("保存 合成图片");
         if (mSaveTask != null) {
             mSaveTask.cancel(true);
         }
         mSaveTask = new SaveStickersTask((EditImageActivity) getActivity());
         mSaveTask.execute(activity.getMainBit());
     }
-}// end class
+}

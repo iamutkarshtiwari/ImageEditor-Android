@@ -3,11 +3,7 @@ package com.xinlan.imageeditlibrary.editimage.fliter;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 
-/**
- * 图片处理类
- *
- * @author 潘易
- */
+
 public class PhotoProcessing {
     private static final String TAG = "PhotoProcessing";
 
@@ -108,11 +104,11 @@ public class PhotoProcessing {
 
     public static native void nativeResizeBitmap(int newWidth, int newHeight);
 
-    public static native void handleSmooth(Bitmap bitmap,float smoothValue);
+    public static native void handleSmooth(Bitmap bitmap, float smoothValue);
 
-    public static native void handleWhiteSkin(Bitmap bitmap,float whiteValue);
+    public static native void handleWhiteSkin(Bitmap bitmap, float whiteValue);
 
-    public static native void handleSmoothAndWhiteSkin(Bitmap bitmap,float smoothValue,float whiteValue);
+    public static native void handleSmoothAndWhiteSkin(Bitmap bitmap, float smoothValue, float whiteValue);
 
     public static native void freeBeautifyMatrix();
 
@@ -193,4 +189,4 @@ public class PhotoProcessing {
         nativeDeleteBitmap();
         return bitmap;
     }
-}// end class
+}

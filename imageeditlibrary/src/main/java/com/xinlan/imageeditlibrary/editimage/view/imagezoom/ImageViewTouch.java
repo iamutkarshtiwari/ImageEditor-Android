@@ -295,7 +295,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
                                float velocityY) {
             return ImageViewTouch.this.onFling(e1, e2, velocityX, velocityY);
         }
-    }// end inner class
+    }
 
     public class ScaleListener extends
             ScaleGestureDetector.SimpleOnScaleGestureListener {
@@ -325,7 +325,7 @@ public class ImageViewTouch extends ImageViewTouchBase {
             }
             return true;
         }
-    }// end inner class
+    }
 
     public void resetImage() {
         float scale = getScale();

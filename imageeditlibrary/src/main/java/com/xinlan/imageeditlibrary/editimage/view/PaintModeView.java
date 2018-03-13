@@ -9,9 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by panyi on 17/2/11.
- */
 
 public class PaintModeView extends View {
     private Paint mPaint;
@@ -81,4 +78,4 @@ public class PaintModeView extends View {
         return mStokeColor;
     }
 
-}//end class
+}

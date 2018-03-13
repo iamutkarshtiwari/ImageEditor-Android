@@ -4,15 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 
 
-/**
- * 工具栏主菜单
- *
- * @author panyi
- */
 public class MainMenuFragment extends BaseEditFragment implements View.OnClickListener {
     public static final int INDEX = ModuleConfig.INDEX_MAIN;
 
@@ -96,7 +92,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
             onAddTextClick();
         } else if (v == mPaintBtn) {
             onPaintClick();
-        } else if (v == mBeautyBtn){
+        } else if (v == mBeautyBtn) {
             onBeautyClick();
         } else if (v == mBrightnessBtn) {
             onBrightnessClick();
@@ -105,65 +101,38 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         }
     }
 
-    /**
-     * 贴图模式
-     *
-     * @author panyi
-     */
     private void onStickClick() {
         activity.bottomGallery.setCurrentItem(StickerFragment.INDEX);
         activity.mStickerFragment.onShow();
     }
 
-    /**
-     * 滤镜模式
-     *
-     * @author panyi
-     */
     private void onFilterClick() {
         activity.bottomGallery.setCurrentItem(FilterListFragment.INDEX);
         activity.mFilterListFragment.onShow();
     }
 
-    /**
-     * 裁剪模式
-     *
-     * @author panyi
-     */
     private void onCropClick() {
         activity.bottomGallery.setCurrentItem(CropFragment.INDEX);
         activity.mCropFragment.onShow();
     }
 
-    /**
-     * 图片旋转模式
-     *
-     * @author panyi
-     */
     private void onRotateClick() {
         activity.bottomGallery.setCurrentItem(RotateFragment.INDEX);
         activity.mRotateFragment.onShow();
     }
 
-    /**
-     * 插入文字模式
-     *
-     * @author panyi
-     */
+
     private void onAddTextClick() {
         activity.bottomGallery.setCurrentItem(AddTextFragment.INDEX);
         activity.mAddTextFragment.onShow();
     }
 
-    /**
-     * 自由绘制模式
-     */
     private void onPaintClick() {
         activity.bottomGallery.setCurrentItem(PaintFragment.INDEX);
         activity.mPaintFragment.onShow();
     }
 
-    private void onBeautyClick(){
+    private void onBeautyClick() {
         activity.bottomGallery.setCurrentItem(BeautyFragment.INDEX);
         activity.mBeautyFragment.onShow();
     }

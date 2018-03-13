@@ -3,18 +3,8 @@ package com.xinlan.imageeditlibrary.editimage.utils;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
-
-/**
- * Created by panyi on 2016/6/16.
- */
 public class RectUtil {
-    /**
-     * 缩放指定矩形
-     *
-     * @param rect
-     * @param scale
-     */
+
     public static void scaleRect(RectF rect, float scale) {
         float w = rect.width();
         float h = rect.height();
@@ -31,12 +21,6 @@ public class RectUtil {
         rect.bottom += dy;
     }
 
-    /**
-     * 矩形绕指定点旋转
-     *
-     * @param rect
-     * @param roatetAngle
-     */
     public static void rotateRect(RectF rect, float center_x, float center_y,
                                   float roatetAngle) {
         float x = rect.centerX();
@@ -52,13 +36,6 @@ public class RectUtil {
         rect.offset(dx, dy);
     }
 
-    /**
-     * 矩形在Y轴方向上的加法操作
-     *
-     * @param srcRect
-     * @param addRect
-     * @param padding
-     */
     public static void rectAddV(final RectF srcRect, final RectF addRect, int padding) {
         if (srcRect == null || addRect == null)
             return;
@@ -77,14 +54,7 @@ public class RectUtil {
         srcRect.set(left, top, right, bottom);
     }
 
-    /**
-     * 矩形在Y轴方向上的加法操作
-     *
-     * @param srcRect
-     * @param addRect
-     * @param padding
-     */
-    public static void rectAddV(final Rect srcRect, final Rect addRect, int padding , int charMinHeight) {
+    public static void rectAddV(final Rect srcRect, final Rect addRect, int padding, int charMinHeight) {
         if (srcRect == null || addRect == null)
             return;
 
@@ -101,4 +71,4 @@ public class RectUtil {
 
         srcRect.set(left, top, right, bottom);
     }
-}//end class
+}

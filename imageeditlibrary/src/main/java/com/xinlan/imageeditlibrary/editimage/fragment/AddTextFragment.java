@@ -1,14 +1,11 @@
 package com.xinlan.imageeditlibrary.editimage.fragment;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,11 +26,6 @@ import com.xinlan.imageeditlibrary.editimage.ui.ColorPicker;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 
 
-/**
- * 添加文本贴图
- *
- * @author 潘易
- */
 public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     public static final int INDEX = ModuleConfig.INDEX_ADDTEXT;
     public static final String TAG = AddTextFragment.class.getName();
@@ -75,7 +67,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mTextStickerView = (TextStickerView)getActivity().findViewById(R.id.text_sticker_panel);
+        mTextStickerView = (TextStickerView) getActivity().findViewById(R.id.text_sticker_panel);
 
         backToMenu = mainView.findViewById(R.id.back_to_main);
         mInputText = (EditText) mainView.findViewById(R.id.text_input);
@@ -106,9 +98,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
 
     }
 
-    /**
-     * 颜色选择 按钮点击
-     */
     private final class SelectColorBtnClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -122,13 +111,8 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
                 }
             });
         }
-    }//end inner class
+    }
 
-    /**
-     * 修改字体颜色
-     *
-     * @param newColor
-     */
     private void changeTextColor(int newColor) {
         this.mTextColor = newColor;
         mTextColorSelector.setBackgroundColor(mTextColor);
@@ -146,21 +130,13 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         return imm.isActive();
     }
 
-    /**
-     * 返回按钮逻辑
-     *
-     * @author panyi
-     */
     private final class BackToMenuClick implements OnClickListener {
         @Override
         public void onClick(View v) {
             backToMain();
         }
-    }// end class
+    }
 
-    /**
-     * 返回主菜单
-     */
     @Override
     public void backToMain() {
         hideInput();
@@ -180,9 +156,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         mInputText.clearFocus();
     }
 
-    /**
-     * 保存贴图图片
-     */
     public void applyTextImage() {
         if (mSaveTask != null) {
             mSaveTask.cancel(true);
@@ -193,10 +166,6 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         mSaveTask.execute(activity.getMainBit());
     }
 
-    /**
-     * 文字合成任务
-     * 合成最终图片
-     */
     private final class SaveTextStickerTask extends StickerTask {
 
         public SaveTextStickerTask(EditImageActivity activity) {
@@ -225,10 +194,10 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
             mTextStickerView.clearTextContent();
             mTextStickerView.resetView();
 
-            activity.changeMainBitmap(result , true);
+            activity.changeMainBitmap(result, true);
             backToMain();
         }
-    }//end inner class
+    }
 
     @Override
     public void onDestroy() {
@@ -237,4 +206,4 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
             mSaveTask.cancel(true);
         }
     }
-}// end class
+}

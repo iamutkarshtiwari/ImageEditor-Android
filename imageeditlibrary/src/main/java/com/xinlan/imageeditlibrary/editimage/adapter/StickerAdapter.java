@@ -1,10 +1,5 @@
 package com.xinlan.imageeditlibrary.editimage.adapter;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -18,16 +13,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.StickerFragment;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * 贴图分类列表Adapter
- *
- * @author panyi
- */
+
 public class StickerAdapter extends RecyclerView.Adapter<ViewHolder> {
     public DisplayImageOptions imageOption = new DisplayImageOptions.Builder()
             .cacheInMemory(true).showImageOnLoading(R.drawable.yd_image_tx)
-            .build();// 下载图片显示
+            .build();
 
     private StickerFragment mStickerFragment;
     private ImageClick mImageClick = new ImageClick();
@@ -45,7 +40,7 @@ public class StickerAdapter extends RecyclerView.Adapter<ViewHolder> {
             super(itemView);
             this.image = (ImageView) itemView.findViewById(R.id.img);
         }
-    }// end inner class
+    }
 
     @Override
     public int getItemCount() {
@@ -90,18 +85,12 @@ public class StickerAdapter extends RecyclerView.Adapter<ViewHolder> {
         this.notifyDataSetChanged();
     }
 
-    /**
-     * 选择贴图
-     *
-     * @author panyi
-     */
     private final class ImageClick implements OnClickListener {
         @Override
         public void onClick(View v) {
             String data = (String) v.getTag();
-            //System.out.println("data---->" + data);
             mStickerFragment.selectedStickerItem(data);
         }
-    }// end inner class
+    }
 
-}// end class
+}

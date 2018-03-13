@@ -28,11 +28,6 @@ import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
 
 
-/**
- * 图片旋转Fragment
- *
- * @author 潘易
- */
 public class RotateFragment extends BaseEditFragment {
     public static final int INDEX = ModuleConfig.INDEX_ROTATE;
     public static final String TAG = RotateFragment.class.getName();
@@ -86,11 +81,6 @@ public class RotateFragment extends BaseEditFragment {
         activity.bannerFlipper.showNext();
     }
 
-    /**
-     * 角度改变监听
-     *
-     * @author panyi
-     */
     private final class RotateAngleChange implements OnSeekBarChangeListener {
         @Override
         public void onProgressChanged(SeekBar seekBar, int angle,
@@ -108,23 +98,15 @@ public class RotateFragment extends BaseEditFragment {
         public void onStopTrackingTouch(SeekBar seekBar) {
 
         }
-    }// end inner class
+    }
 
-    /**
-     * 返回按钮逻辑
-     *
-     * @author panyi
-     */
     private final class BackToMenuClick implements OnClickListener {
         @Override
         public void onClick(View v) {
             backToMain();
         }
-    }// end class
+    }
 
-    /**
-     * 返回主菜单
-     */
     @Override
     public void backToMain() {
         activity.mode = EditImageActivity.MODE_NONE;
@@ -134,9 +116,6 @@ public class RotateFragment extends BaseEditFragment {
         activity.bannerFlipper.showPrevious();
     }
 
-    /**
-     * 保存旋转图片
-     */
     public void applyRotateImage() {
         // System.out.println("保存旋转图片");
         if (mSeekBar.getProgress() == 0 || mSeekBar.getProgress() == 360) {// 没有做旋转
@@ -145,14 +124,9 @@ public class RotateFragment extends BaseEditFragment {
         } else {// 保存图片
             SaveRotateImageTask task = new SaveRotateImageTask();
             task.execute(activity.getMainBit());
-        }// end if
+        }
     }
 
-    /**
-     * 保存图片线程
-     *
-     * @author panyi
-     */
     private final class SaveRotateImageTask extends
             AsyncTask<Bitmap, Void, Bitmap> {
         //private Dialog dialog;
@@ -191,9 +165,6 @@ public class RotateFragment extends BaseEditFragment {
             RectF dst = new RectF(left, top, left + originBit.getWidth(), top
                     + originBit.getHeight());
             canvas.save();
-            //bug fixed  应用时不需要考虑图片缩放问题 重新加载图片时 缩放控件会自动填充屏幕
-//            canvas.scale(mRotatePanel.getScale(), mRotatePanel.getScale(),
-//                    imageRect.width() / 2, imageRect.height() / 2);
             canvas.rotate(mRotatePanel.getRotateAngle(), imageRect.width() / 2,
                     imageRect.height() / 2);
 
@@ -206,21 +177,14 @@ public class RotateFragment extends BaseEditFragment {
         @Override
         protected void onPostExecute(Bitmap result) {
             super.onPostExecute(result);
-            //dialog.dismiss();
             if (result == null)
                 return;
 
-            // 切换新底图
             activity.changeMainBitmap(result,true);
             backToMain();
         }
-    }// end inner class
+    }
 
-    /**
-     * 保存Bitmap图片到指定文件
-     *
-     * @param bm
-     */
     public static void saveBitmap(Bitmap bm, String filePath) {
         File f = new File(filePath);
         if (f.exists()) {
@@ -236,6 +200,5 @@ public class RotateFragment extends BaseEditFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // System.out.println("保存文件--->" + f.getAbsolutePath());
     }
-}// end class
+}

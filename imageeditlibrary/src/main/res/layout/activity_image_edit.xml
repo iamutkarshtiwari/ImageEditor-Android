@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,9 +24,9 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/back_btn"
             android:gravity="center"
-            android:layout_marginLeft="16dp"
             android:text="@string/app_name"
             android:textColor="#ffffff"
             android:textSize="20sp" />
@@ -36,8 +35,8 @@
             android:id="@+id/banner_flipper"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_gravity="right"
             android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             android:layout_marginRight="8dp"
             android:flipInterval="1000"
             android:gravity="center">
@@ -101,6 +100,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
+            android:visibility="gone"
             custom:scv_background_color="@color/main_backgroud"
             custom:scv_crop_mode="free"
             custom:scv_frame_color="@color/white"
@@ -113,8 +113,7 @@
             custom:scv_handle_size="14dp"
             custom:scv_min_frame_size="50dp"
             custom:scv_overlay_color="#aa1c1c1c"
-            custom:scv_touch_padding="8dp"
-            android:visibility="gone"/>
+            custom:scv_touch_padding="8dp" />
 
         <com.xinlan.imageeditlibrary.editimage.view.RotateImageView
             android:id="@+id/rotate_panel"
@@ -162,12 +161,14 @@
         android:paddingBottom="16dp"
         android:paddingLeft="8dp"
         android:paddingRight="10dp">
+
         <ImageView
             android:id="@+id/undo_btn"
             android:layout_width="40dp"
             android:layout_height="35dp"
             android:layout_marginRight="5dp"
             android:src="@drawable/undo" />
+
         <ImageView
             android:id="@+id/redo_btn"
             android:layout_width="40dp"

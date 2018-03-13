@@ -40,12 +40,6 @@ public class BrightnessView extends AppCompatImageView {
     private void initView() {
         subject = PublishSubject.create();
         subject.debounce(0, TimeUnit.MILLISECONDS)
-//                .filter(new Predicate<Float>() {
-//                    @Override
-//                    public boolean test(Float brightness) throws Exception {
-//                        return true;
-//                    }
-//                })
                 .distinctUntilChanged()
                 .switchMap(new Function<Float, ObservableSource<ColorMatrixColorFilter>>() {
                     @Override

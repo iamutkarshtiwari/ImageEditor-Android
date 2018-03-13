@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -24,18 +23,9 @@ import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 import com.xinlan.imageeditlibrary.editimage.adapter.ColorListAdapter;
 import com.xinlan.imageeditlibrary.editimage.task.StickerTask;
 import com.xinlan.imageeditlibrary.editimage.ui.ColorPicker;
-import com.xinlan.imageeditlibrary.editimage.utils.DensityUtil;
 import com.xinlan.imageeditlibrary.editimage.view.CustomPaintView;
 import com.xinlan.imageeditlibrary.editimage.view.PaintModeView;
 
-
-/**
- * 用户自由绘制模式 操作面板
- * 可设置画笔粗细 画笔颜色
- * custom draw mode panel
- *
- * @author panyi
- */
 public class PaintFragment extends BaseEditFragment implements View.OnClickListener, ColorListAdapter.IColorListAction {
     public static final int INDEX = ModuleConfig.INDEX_PAINT;
     public static final String TAG = PaintFragment.class.getName();
@@ -80,7 +70,7 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mPaintView = (CustomPaintView)getActivity().findViewById(R.id.custom_paint_view);
+        mPaintView = (CustomPaintView) getActivity().findViewById(R.id.custom_paint_view);
         backToMenu = mainView.findViewById(R.id.back_to_main);
         mPaintModeView = (PaintModeView) mainView.findViewById(R.id.paint_thumb);
         mColorListView = (RecyclerView) mainView.findViewById(R.id.paint_color_list);
@@ -98,9 +88,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         updateEraserView();
     }
 
-    /**
-     * 初始化颜色列表
-     */
     private void initColorListView() {
 
         mColorListView.setHasFixedSize(false);
@@ -126,9 +113,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         }//end if
     }
 
-    /**
-     * 返回主菜单
-     */
     public void backToMain() {
         activity.mode = EditImageActivity.MODE_NONE;
         activity.bottomGallery.setCurrentItem(MainMenuFragment.INDEX);
@@ -163,11 +147,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         });
     }
 
-    /**
-     * 设置画笔颜色
-     *
-     * @param paintColor
-     */
     protected void setPaintColor(final int paintColor) {
         mPaintModeView.setPaintStrokeColor(paintColor);
 
@@ -182,10 +161,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         this.mPaintView.setWidth(mPaintModeView.getStokenWidth());
     }
 
-    /**
-     * 设置画笔粗细
-     * show popwidnow to set paint width
-     */
     protected void setStokeWidth() {
         if (popView.getMeasuredHeight() == 0) {
             popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
@@ -249,9 +224,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         mPaintView.setEraser(isEraser);
     }
 
-    /**
-     * 保存涂鸦
-     */
     public void savePaintImage() {
         if (mSavePaintImageTask != null && !mSavePaintImageTask.isCancelled()) {
             mSavePaintImageTask.cancel(true);
@@ -269,10 +241,6 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         }
     }
 
-    /**
-     * 文字合成任务
-     * 合成最终图片
-     */
     private final class SaveCustomPaintTask extends StickerTask {
 
         public SaveCustomPaintTask(EditImageActivity activity) {
@@ -300,9 +268,9 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         @Override
         public void onPostResult(Bitmap result) {
             mPaintView.reset();
-            activity.changeMainBitmap(result , true);
+            activity.changeMainBitmap(result, true);
             backToMain();
         }
-    }//end inner class
+    }
 
-}// end class
+}

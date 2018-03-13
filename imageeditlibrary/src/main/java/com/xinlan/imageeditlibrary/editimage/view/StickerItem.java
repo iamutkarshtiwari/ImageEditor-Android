@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.view.View;
@@ -18,9 +17,6 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.utils.RectUtil;
 
 
-/**
- * @author panyi
- */
 public class StickerItem {
     private static final float MIN_SCALE = 0.15f;
     private static final int HELP_BOX_PAD = 25;
@@ -28,11 +24,11 @@ public class StickerItem {
     private static final int BUTTON_WIDTH = Constants.STICKER_BTN_HALF_SIZE;
 
     public Bitmap bitmap;
-    public Rect srcRect;// 原始图片坐标
-    public RectF dstRect;// 绘制目标坐标
+    public Rect srcRect;
+    public RectF dstRect;
     private Rect helpToolsRect;
-    public RectF deleteRect;// 删除按钮位置
-    public RectF rotateRect;// 旋转按钮位置
+    public RectF deleteRect;
+    public RectF rotateRect;
 
     RectF helpBox;
     public Matrix matrix;// 变化矩阵
@@ -67,15 +63,14 @@ public class StickerItem {
         greenPaint.setColor(Color.GREEN);
         greenPaint.setAlpha(120);
 
-        // 导入工具按钮位图
         if (deleteBit == null) {
             deleteBit = BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.sticker_delete);
-        }// end if
+        }
         if (rotateBit == null) {
             rotateBit = BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.sticker_rotate);
-        }// end if
+        }
     }
 
     public void init(Bitmap addBit, View parentView) {
@@ -91,9 +86,7 @@ public class StickerItem {
         this.matrix.postScale((float) bitWidth / addBit.getWidth(),
                 (float) bitHeight / addBit.getHeight(), this.dstRect.left,
                 this.dstRect.top);
-        initWidth = this.dstRect.width();// 记录原始宽度
-        // item.matrix.setScale((float)bitWidth/addBit.getWidth(),
-        // (float)bitHeight/addBit.getHeight());
+        initWidth = this.dstRect.width();
         this.isDrawHelpTool = true;
         this.helpBox = new RectF(this.dstRect);
         updateHelpBoxRect();
@@ -119,18 +112,11 @@ public class StickerItem {
         this.helpBox.bottom += HELP_BOX_PAD;
     }
 
-    /**
-     * 位置更新
-     *
-     * @param dx
-     * @param dy
-     */
     public void updatePos(final float dx, final float dy) {
-        this.matrix.postTranslate(dx, dy);// 记录到矩阵中
+        this.matrix.postTranslate(dx, dy);
 
         dstRect.offset(dx, dy);
 
-        // 工具按钮随之移动
         helpBox.offset(dx, dy);
         deleteRect.offset(dx, dy);
         rotateRect.offset(dx, dy);
@@ -139,12 +125,6 @@ public class StickerItem {
         this.detectDeleteRect.offset(dx, dy);
     }
 
-    /**
-     * 旋转 缩放 更新
-     *
-     * @param dx
-     * @param dy
-     */
     public void updateRotateAndScale(final float oldx, final float oldy,
                                      final float dx, final float dy) {
         float c_x = dstRect.centerX();
@@ -152,9 +132,6 @@ public class StickerItem {
 
         float x = this.detectRotateRect.centerX();
         float y = this.detectRotateRect.centerY();
-
-        // float x = oldx;
-        // float y = oldy;
 
         float n_x = x + dx;
         float n_y = y + dy;
@@ -168,25 +145,19 @@ public class StickerItem {
         float srcLen = (float) Math.sqrt(xa * xa + ya * ya);
         float curLen = (float) Math.sqrt(xb * xb + yb * yb);
 
-        // System.out.println("srcLen--->" + srcLen + "   curLen---->" +
-        // curLen);
-
-        float scale = curLen / srcLen;// 计算缩放比
+        float scale = curLen / srcLen;
 
         float newWidth = dstRect.width() * scale;
-        if (newWidth / initWidth < MIN_SCALE) {// 最小缩放值检测
+        if (newWidth / initWidth < MIN_SCALE) {
             return;
         }
 
         this.matrix.postScale(scale, scale, this.dstRect.centerX(),
-                this.dstRect.centerY());// 存入scale矩阵
-        // this.matrix.postRotate(5, this.dstRect.centerX(),
-        // this.dstRect.centerY());
-        RectUtil.scaleRect(this.dstRect, scale);// 缩放目标矩形
+                this.dstRect.centerY());
+        RectUtil.scaleRect(this.dstRect, scale);
 
-        // 重新计算工具箱坐标
         helpBox.set(dstRect);
-        updateHelpBoxRect();// 重新计算
+        updateHelpBoxRect();
         rotateRect.offsetTo(helpBox.right - BUTTON_WIDTH, helpBox.bottom
                 - BUTTON_WIDTH);
         deleteRect.offsetTo(helpBox.left - BUTTON_WIDTH, helpBox.top
@@ -201,15 +172,12 @@ public class StickerItem {
         if (cos > 1 || cos < -1)
             return;
         float angle = (float) Math.toDegrees(Math.acos(cos));
-        // System.out.println("angle--->" + angle);
 
-        // 定理
-        float calMatrix = xa * yb - xb * ya;// 行列式计算 确定转动方向
+        float calMatrix = xa * yb - xb * ya;
 
         int flag = calMatrix > 0 ? 1 : -1;
         angle = flag * angle;
 
-        // System.out.println("angle--->" + angle);
         roatetAngle += angle;
         this.matrix.postRotate(angle, this.dstRect.centerX(),
                 this.dstRect.centerY());
@@ -218,18 +186,12 @@ public class StickerItem {
                 this.dstRect.centerY(), roatetAngle);
         RectUtil.rotateRect(this.detectDeleteRect, this.dstRect.centerX(),
                 this.dstRect.centerY(), roatetAngle);
-        // System.out.println("angle----->" + angle + "   " + flag);
-
-        // System.out
-        // .println(srcLen + "     " + curLen + "    scale--->" + scale);
-
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(this.bitmap, this.matrix, null);// 贴图元素绘制
-        // canvas.drawRect(this.dstRect, dstPaint);
+        canvas.drawBitmap(this.bitmap, this.matrix, null);
 
-        if (this.isDrawHelpTool) {// 绘制辅助工具线
+        if (this.isDrawHelpTool) {
             canvas.save();
             canvas.rotate(roatetAngle, helpBox.centerX(), helpBox.centerY());
             canvas.drawRoundRect(helpBox, 10, 10, helpBoxPaint);
@@ -237,12 +199,6 @@ public class StickerItem {
             canvas.drawBitmap(deleteBit, helpToolsRect, deleteRect, null);
             canvas.drawBitmap(rotateBit, helpToolsRect, rotateRect, null);
             canvas.restore();
-            // canvas.drawRect(deleteRect, dstPaint);
-            // canvas.drawRect(rotateRect, dstPaint);
-            // canvas.drawRect(detectRotateRect, this.greenPaint);
-            // canvas.drawRect(detectDeleteRect, this.greenPaint);
-        }// end if
-
-        // detectRotateRect
+        }
     }
-}// end class
+}
