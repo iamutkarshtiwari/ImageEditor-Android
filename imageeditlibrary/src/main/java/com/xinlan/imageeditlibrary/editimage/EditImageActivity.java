@@ -25,6 +25,7 @@ import com.xinlan.imageeditlibrary.BaseActivity;
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.BeautyFragment;
+import com.xinlan.imageeditlibrary.editimage.fragment.BrightnessFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.CropFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.FilterListFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.MainMenuFragment;
@@ -37,6 +38,7 @@ import com.xinlan.imageeditlibrary.editimage.view.CustomViewPager;
 import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
 import com.xinlan.imageeditlibrary.editimage.view.StickerView;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
+import com.xinlan.imageeditlibrary.editimage.view.BrightnessView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
@@ -66,6 +68,7 @@ public class EditImageActivity extends BaseActivity {
     public static final int MODE_TEXT = 5;// 文字模式
     public static final int MODE_PAINT = 6;//绘制模式
     public static final int MODE_BEAUTY = 7;//美颜模式
+    public static final int MODE_BRIGHTNESS = 8;
 
     public String filePath;// 需要编辑图片路径
     public String saveFilePath;// 生成的新图片路径
@@ -91,6 +94,7 @@ public class EditImageActivity extends BaseActivity {
     public RotateImageView mRotatePanel;// 旋转操作控件
     public TextStickerView mTextStickerView;//文本贴图显示View
     public CustomPaintView mPaintView;//涂鸦模式画板
+    public BrightnessView mBrightnessView;
 
     public CustomViewPager bottomGallery;// 底部gallery
     private BottomGalleryAdapter mBottomGalleryAdapter;// 底部gallery
@@ -103,6 +107,7 @@ public class EditImageActivity extends BaseActivity {
     public PaintFragment mPaintFragment;//绘制模式Fragment
     public BeautyFragment mBeautyFragment;//美颜模式Fragment
     private SaveImageTask mSaveImageTask;
+    public BrightnessFragment mBrightnessFragment;
 
     private RedoUndoController mRedoUndoController;//撤销操作
 
@@ -167,6 +172,7 @@ public class EditImageActivity extends BaseActivity {
         mRotatePanel = (RotateImageView) findViewById(R.id.rotate_panel);
         mTextStickerView = (TextStickerView) findViewById(R.id.text_sticker_panel);
         mPaintView = (CustomPaintView) findViewById(R.id.custom_paint_view);
+        mBrightnessView = (BrightnessView) findViewById(R.id.brightness_panel);
 
         // 底部gallery
         bottomGallery = (CustomViewPager) findViewById(R.id.bottom_gallery);
@@ -181,6 +187,7 @@ public class EditImageActivity extends BaseActivity {
         mAddTextFragment = AddTextFragment.newInstance();
         mPaintFragment = PaintFragment.newInstance();
         mBeautyFragment = BeautyFragment.newInstance();
+        mBrightnessFragment = BrightnessFragment.newInstance();
 
         bottomGallery.setAdapter(mBottomGalleryAdapter);
 
@@ -205,6 +212,11 @@ public class EditImageActivity extends BaseActivity {
         if (mAddTextFragment.isAdded()) {
             mAddTextFragment.hideInput();
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
     /**
@@ -235,13 +247,15 @@ public class EditImageActivity extends BaseActivity {
                     return mPaintFragment;//绘制
                 case BeautyFragment.INDEX://美颜
                     return mBeautyFragment;
+                case BrightnessFragment.INDEX:
+                    return mBrightnessFragment;
             }//end switch
             return MainMenuFragment.newInstance();
         }
 
         @Override
         public int getCount() {
-            return 8;
+            return 9;
         }
     }// end inner class
 
@@ -298,6 +312,8 @@ public class EditImageActivity extends BaseActivity {
                 return;
             case MODE_BEAUTY://从美颜模式中返回
                 mBeautyFragment.backToMain();
+            case MODE_BRIGHTNESS:
+                mBrightnessFragment.backToMain();
                 return;
         }// end switch
 
@@ -350,6 +366,9 @@ public class EditImageActivity extends BaseActivity {
                     break;
                 case MODE_BEAUTY://保存美颜后的图片
                     mBeautyFragment.applyBeauty();
+                    break;
+                case MODE_BRIGHTNESS:
+                    mBrightnessFragment.applyBrightness();
                     break;
                 default:
                     break;

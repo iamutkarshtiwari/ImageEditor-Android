@@ -26,6 +26,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private View mTextBtn;//文字型贴图添加
     private View mPaintBtn;//编辑按钮
     private View mBeautyBtn;//美颜按钮
+    private View mBrightnessBtn;
 
     public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
@@ -56,6 +57,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mTextBtn = mainView.findViewById(R.id.btn_text);
         mPaintBtn = mainView.findViewById(R.id.btn_paint);
         mBeautyBtn = mainView.findViewById(R.id.btn_beauty);
+        mBrightnessBtn = mainView.findViewById(R.id.btn_brightness);
 
         stickerBtn.setOnClickListener(this);
         fliterBtn.setOnClickListener(this);
@@ -64,6 +66,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mTextBtn.setOnClickListener(this);
         mPaintBtn.setOnClickListener(this);
         mBeautyBtn.setOnClickListener(this);
+        mBrightnessBtn.setOnClickListener(this);
     }
 
     @Override
@@ -90,8 +93,10 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
             onAddTextClick();
         } else if (v == mPaintBtn) {
             onPaintClick();
-        }else if(v == mBeautyBtn){
+        } else if (v == mBeautyBtn){
             onBeautyClick();
+        } else if (v == mBrightnessBtn) {
+            onBrightnessClick();
         }
     }
 
@@ -158,4 +163,9 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         activity.mBeautyFragment.onShow();
     }
 
-}// end class
+    private void onBrightnessClick() {
+        activity.bottomGallery.setCurrentItem(BrightnessFragment.INDEX);
+        activity.mBrightnessFragment.onShow();
+    }
+
+}
