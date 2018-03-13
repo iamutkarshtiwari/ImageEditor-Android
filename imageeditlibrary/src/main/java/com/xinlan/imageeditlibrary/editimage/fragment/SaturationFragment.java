@@ -105,7 +105,7 @@ public class SaturationFragment extends BaseEditFragment {
     }
 
     public void applySaturation() {
-        if (mSeekBar.getProgress() == mSeekBar.getMax()) {// 没有做旋转
+        if (mSeekBar.getProgress() == mSeekBar.getMax()) {
             backToMain();
             return;
         }
