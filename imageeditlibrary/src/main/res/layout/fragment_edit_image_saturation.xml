@@ -7,7 +7,6 @@
         android:id="@+id/back_to_main"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:src="@drawable/image_edit_back" />
 
@@ -19,7 +18,7 @@
         android:layout_toRightOf="@id/back_to_main"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
-        android:progress="1000"
+        android:progress="2000"
         android:max="2000" />
 
 </RelativeLayout>

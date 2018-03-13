@@ -97,7 +97,6 @@
             android:id="@+id/crop_panel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:paddingBottom="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -140,6 +139,13 @@
 
         <com.xinlan.imageeditlibrary.editimage.view.BrightnessView
             android:id="@+id/brightness_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <com.xinlan.imageeditlibrary.editimage.view.SaturationView
+            android:id="@+id/contrast_panel"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"

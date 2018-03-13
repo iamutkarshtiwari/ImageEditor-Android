@@ -68,4 +68,41 @@ public class Utils {
         return resultBitmap;
     }
 
+    public static Bitmap contrastBitmap(Bitmap bitmap, float contrast) {
+        float[] colorTransform = new float[]{
+                contrast, 0, 0, 0, 0,
+                0, contrast, 0, 0, 0,
+                0, 0, contrast, 0, 0,
+                0, 0, 0, 1, 0};
+
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0f);
+        colorMatrix.set(colorTransform);
+
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+        Paint paint = new Paint();
+        paint.setColorFilter(colorFilter);
+
+        Bitmap resultBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(resultBitmap);
+        canvas.drawBitmap(resultBitmap, 0, 0, paint);
+
+        return resultBitmap;
+    }
+
+    public static Bitmap saturationBitmap(Bitmap bitmap, float saturation) {
+
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(saturation);
+
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(colorMatrix);
+        Paint paint = new Paint();
+        paint.setColorFilter(colorFilter);
+
+        Bitmap resultBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(resultBitmap);
+        canvas.drawBitmap(resultBitmap, 0, 0, paint);
+
+        return resultBitmap;
+    }
 }

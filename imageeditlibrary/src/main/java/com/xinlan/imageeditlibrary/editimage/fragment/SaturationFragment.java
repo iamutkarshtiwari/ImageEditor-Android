@@ -14,15 +14,14 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 import com.xinlan.imageeditlibrary.editimage.utils.Utils;
-import com.xinlan.imageeditlibrary.editimage.view.BrightnessView;
+import com.xinlan.imageeditlibrary.editimage.view.SaturationView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
 
+public class SaturationFragment extends BaseEditFragment {
 
-public class BrightnessFragment extends BaseEditFragment {
-
-    public static final int INDEX = ModuleConfig.INDEX_BRIGHTNESS;
-    public static final String TAG = BrightnessFragment.class.getName();
-    BrightnessView mBrightnessView;
+    public static final int INDEX = ModuleConfig.INDEX_CONTRAST;
+    public static final String TAG = SaturationFragment.class.getName();
+    SaturationView mSaturationView;
     SeekBar mSeekBar;
     private View mainView;
     private View mBackToMenu;
@@ -30,18 +29,18 @@ public class BrightnessFragment extends BaseEditFragment {
     private boolean start = true;
 
     @SuppressLint("ValidFragment")
-    private BrightnessFragment() {
+    private SaturationFragment() {
     }
 
-    public static BrightnessFragment newInstance() {
-        BrightnessFragment fragment = new BrightnessFragment();
+    public static SaturationFragment newInstance() {
+        SaturationFragment fragment = new SaturationFragment();
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.fragment_edit_image_brightness, null);
+        mainView = inflater.inflate(R.layout.fragment_edit_image_saturation, null);
         mappingView(mainView);
         return mainView;
     }
@@ -61,13 +60,13 @@ public class BrightnessFragment extends BaseEditFragment {
 
         mBackToMenu = mainView.findViewById(R.id.back_to_main);
 
-        this.mBrightnessView = ensureEditActivity().mBrightnessView;
-        mBackToMenu.setOnClickListener(new BrightnessFragment.BackToMenuClick());
+        this.mSaturationView = ensureEditActivity().mSaturationView;
+        mBackToMenu.setOnClickListener(new SaturationFragment.BackToMenuClick());
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float value = progress - (seekBar.getMax() / 2);
-                activity.mBrightnessView.setBright(value / 10f);
+                activity.mSaturationView.setSaturation(value / 10f);
             }
 
             @Override
@@ -85,13 +84,13 @@ public class BrightnessFragment extends BaseEditFragment {
 
     @Override
     public void onShow() {
-        activity.mode = EditImageActivity.MODE_BRIGHTNESS;
+        activity.mode = EditImageActivity.MODE_SATURATION;
         activity.mainImage.setImageBitmap(activity.getMainBit());
         activity.mainImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
         activity.mainImage.setVisibility(View.GONE);
 
-        activity.mBrightnessView.setImageBitmap(activity.getMainBit());
-        activity.mBrightnessView.setVisibility(View.VISIBLE);
+        activity.mSaturationView.setImageBitmap(activity.getMainBit());
+        activity.mSaturationView.setVisibility(View.VISIBLE);
         initView();
         activity.bannerFlipper.showNext();
     }
@@ -101,22 +100,22 @@ public class BrightnessFragment extends BaseEditFragment {
         activity.mode = EditImageActivity.MODE_NONE;
         activity.bottomGallery.setCurrentItem(0);
         activity.mainImage.setVisibility(View.VISIBLE);
-        activity.mBrightnessView.setVisibility(View.GONE);
+        activity.mSaturationView.setVisibility(View.GONE);
         activity.bannerFlipper.showPrevious();
     }
 
-    public void applyBrightness() {
-        if (mSeekBar.getProgress() == mSeekBar.getMax() / 2) {// 没有做旋转
+    public void applySaturation() {
+        if (mSeekBar.getProgress() == mSeekBar.getMax()) {// 没有做旋转
             backToMain();
             return;
         }
-        Bitmap bitmap = ((BitmapDrawable) mBrightnessView.getDrawable()).getBitmap();
-        activity.changeMainBitmap(Utils.brightBitmap(bitmap, mBrightnessView.getBright()), true);
+        Bitmap bitmap = ((BitmapDrawable) mSaturationView.getDrawable()).getBitmap();
+        activity.changeMainBitmap(Utils.saturationBitmap(bitmap, mSaturationView.getSaturation()), true);
         backToMain();
     }
 
     private void initView() {
-        mSeekBar.setProgress(mSeekBar.getMax() / 2);
+        mSeekBar.setProgress(mSeekBar.getMax());
     }
 
     private void back() {
@@ -128,6 +127,5 @@ public class BrightnessFragment extends BaseEditFragment {
         public void onClick(View v) {
             backToMain();
         }
-    }//
-
+    }
 }

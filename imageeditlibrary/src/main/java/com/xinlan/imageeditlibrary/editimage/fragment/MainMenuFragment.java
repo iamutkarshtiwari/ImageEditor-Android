@@ -19,14 +19,15 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     public static final String TAG = MainMenuFragment.class.getName();
     private View mainView;
 
-    private View stickerBtn;// 贴图按钮
-    private View fliterBtn;// 滤镜按钮
-    private View cropBtn;// 剪裁按钮
-    private View rotateBtn;// 旋转按钮
-    private View mTextBtn;//文字型贴图添加
-    private View mPaintBtn;//编辑按钮
-    private View mBeautyBtn;//美颜按钮
+    private View stickerBtn;
+    private View fliterBtn;
+    private View cropBtn;
+    private View rotateBtn;
+    private View mTextBtn;
+    private View mPaintBtn;
+    private View mBeautyBtn;
     private View mBrightnessBtn;
+    private View mSaturationBtn;
 
     public static MainMenuFragment newInstance() {
         MainMenuFragment fragment = new MainMenuFragment();
@@ -58,6 +59,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mPaintBtn = mainView.findViewById(R.id.btn_paint);
         mBeautyBtn = mainView.findViewById(R.id.btn_beauty);
         mBrightnessBtn = mainView.findViewById(R.id.btn_brightness);
+        mSaturationBtn = mainView.findViewById(R.id.btn_contrast);
 
         stickerBtn.setOnClickListener(this);
         fliterBtn.setOnClickListener(this);
@@ -67,6 +69,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mPaintBtn.setOnClickListener(this);
         mBeautyBtn.setOnClickListener(this);
         mBrightnessBtn.setOnClickListener(this);
+        mSaturationBtn.setOnClickListener(this);
     }
 
     @Override
@@ -97,6 +100,8 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
             onBeautyClick();
         } else if (v == mBrightnessBtn) {
             onBrightnessClick();
+        } else if (v == mSaturationBtn) {
+            onContrastClick();
         }
     }
 
@@ -168,4 +173,8 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         activity.mBrightnessFragment.onShow();
     }
 
+    private void onContrastClick() {
+        activity.bottomGallery.setCurrentItem(SaturationFragment.INDEX);
+        activity.mSaturationFragment.onShow();
+    }
 }

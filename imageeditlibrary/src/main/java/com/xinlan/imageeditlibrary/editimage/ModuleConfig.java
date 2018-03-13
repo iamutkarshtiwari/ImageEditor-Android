@@ -1,9 +1,5 @@
 package com.xinlan.imageeditlibrary.editimage;
 
-/**
- * Created by panyi on 2017/7/12.
- */
-
 public final class ModuleConfig {
     public static final int INDEX_MAIN = 0;
     public static final int INDEX_STICKER = 1;
@@ -12,6 +8,7 @@ public final class ModuleConfig {
     public static final int INDEX_ROTATE = 4;
     public static final int INDEX_ADDTEXT = 5;
     public static final int INDEX_PAINT = 6;
-    public static final int INDEX_BEAUTY = 7;//美颜
+    public static final int INDEX_BEAUTY = 7;
     public static final int INDEX_BRIGHTNESS = 8;
+    public static final int INDEX_CONTRAST = 9;
 }

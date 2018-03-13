@@ -1,20 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:layout_height="fill_parent" >
 
     <ImageView
         android:id="@+id/back_to_main"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:src="@drawable/image_edit_back" />
 
     <HorizontalScrollView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/back_to_main"
+        android:layout_centerInParent="true">
 
         <LinearLayout
             android:id="@+id/ratio_list_group"
@@ -25,4 +28,4 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-</LinearLayout>
+</RelativeLayout>

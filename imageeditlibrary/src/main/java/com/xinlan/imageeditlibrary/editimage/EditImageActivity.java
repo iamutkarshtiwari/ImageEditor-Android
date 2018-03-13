@@ -26,6 +26,7 @@ import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.fragment.AddTextFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.BeautyFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.BrightnessFragment;
+import com.xinlan.imageeditlibrary.editimage.fragment.SaturationFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.CropFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.FilterListFragment;
 import com.xinlan.imageeditlibrary.editimage.fragment.MainMenuFragment;
@@ -39,20 +40,13 @@ import com.xinlan.imageeditlibrary.editimage.view.RotateImageView;
 import com.xinlan.imageeditlibrary.editimage.view.StickerView;
 import com.xinlan.imageeditlibrary.editimage.view.TextStickerView;
 import com.xinlan.imageeditlibrary.editimage.view.BrightnessView;
+import com.xinlan.imageeditlibrary.editimage.view.SaturationView;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouchBase;
 import com.xinlan.imageeditlibrary.editimage.widget.RedoUndoController;
 
-/**
- * <p>
- * 图片编辑 主页面
- *
- * @author panyi
- *         <p>
- *         包含 1.贴图 2.滤镜 3.剪裁 4.底图旋转 功能
- *         add new modules
- */
+
 public class EditImageActivity extends BaseActivity {
     public static final String FILE_PATH = "file_path";
     public static final String EXTRA_OUTPUT = "extra_output";
@@ -69,6 +63,7 @@ public class EditImageActivity extends BaseActivity {
     public static final int MODE_PAINT = 6;//绘制模式
     public static final int MODE_BEAUTY = 7;//美颜模式
     public static final int MODE_BRIGHTNESS = 8;
+    public static final int MODE_SATURATION = 9;
 
     public String filePath;// 需要编辑图片路径
     public String saveFilePath;// 生成的新图片路径
@@ -95,6 +90,7 @@ public class EditImageActivity extends BaseActivity {
     public TextStickerView mTextStickerView;//文本贴图显示View
     public CustomPaintView mPaintView;//涂鸦模式画板
     public BrightnessView mBrightnessView;
+    public SaturationView mSaturationView;
 
     public CustomViewPager bottomGallery;// 底部gallery
     private BottomGalleryAdapter mBottomGalleryAdapter;// 底部gallery
@@ -108,6 +104,7 @@ public class EditImageActivity extends BaseActivity {
     public BeautyFragment mBeautyFragment;//美颜模式Fragment
     private SaveImageTask mSaveImageTask;
     public BrightnessFragment mBrightnessFragment;
+    public SaturationFragment mSaturationFragment;
 
     private RedoUndoController mRedoUndoController;//撤销操作
 
@@ -173,6 +170,8 @@ public class EditImageActivity extends BaseActivity {
         mTextStickerView = (TextStickerView) findViewById(R.id.text_sticker_panel);
         mPaintView = (CustomPaintView) findViewById(R.id.custom_paint_view);
         mBrightnessView = (BrightnessView) findViewById(R.id.brightness_panel);
+        mSaturationView = (SaturationView) findViewById(R.id.contrast_panel);
+
 
         // 底部gallery
         bottomGallery = (CustomViewPager) findViewById(R.id.bottom_gallery);
@@ -188,6 +187,7 @@ public class EditImageActivity extends BaseActivity {
         mPaintFragment = PaintFragment.newInstance();
         mBeautyFragment = BeautyFragment.newInstance();
         mBrightnessFragment = BrightnessFragment.newInstance();
+        mSaturationFragment = SaturationFragment.newInstance();
 
         bottomGallery.setAdapter(mBottomGalleryAdapter);
 
@@ -249,13 +249,15 @@ public class EditImageActivity extends BaseActivity {
                     return mBeautyFragment;
                 case BrightnessFragment.INDEX:
                     return mBrightnessFragment;
+                case SaturationFragment.INDEX:
+                    return mSaturationFragment;
             }//end switch
             return MainMenuFragment.newInstance();
         }
 
         @Override
         public int getCount() {
-            return 9;
+            return 10;
         }
     }// end inner class
 
@@ -294,27 +296,33 @@ public class EditImageActivity extends BaseActivity {
         switch (mode) {
             case MODE_STICKERS:
                 mStickerFragment.backToMain();
-                return;
+                break;
             case MODE_FILTER:// 滤镜编辑状态
                 mFilterListFragment.backToMain();// 保存滤镜贴图
-                return;
+                break;
             case MODE_CROP:// 剪切图片保存
                 mCropFragment.backToMain();
-                return;
+                break;
             case MODE_ROTATE:// 旋转图片保存
                 mRotateFragment.backToMain();
-                return;
+                break;
             case MODE_TEXT:
                 mAddTextFragment.backToMain();
-                return;
+                break;
             case MODE_PAINT:
                 mPaintFragment.backToMain();
-                return;
+                break;
             case MODE_BEAUTY://从美颜模式中返回
                 mBeautyFragment.backToMain();
+                break;
             case MODE_BRIGHTNESS:
                 mBrightnessFragment.backToMain();
-                return;
+                break;
+            case MODE_SATURATION:
+                mSaturationFragment.backToMain();
+                break;
+            default:
+                break;
         }// end switch
 
         if (canAutoExit()) {
@@ -369,6 +377,9 @@ public class EditImageActivity extends BaseActivity {
                     break;
                 case MODE_BRIGHTNESS:
                     mBrightnessFragment.applyBrightness();
+                    break;
+                case MODE_SATURATION:
+                    mSaturationFragment.applySaturation();
                     break;
                 default:
                     break;

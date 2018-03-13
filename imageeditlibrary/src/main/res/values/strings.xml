@@ -12,6 +12,7 @@
     <string name="text">Text</string>
     <string name="edit">Edit</string>
     <string name="brightness">Brightness</string>
+    <string name="saturation">Saturation</string>
 
     <string name="materialcolorpicker__app_name">Android Material Color Picker Dialog</string>
     <string name="materialcolorpicker__descLib">Material Color Picker Dialog</string>
